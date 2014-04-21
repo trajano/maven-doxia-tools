@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title>Doxia :: Tools Aggregator - Project License</title>
+		<title>Doxia :: Tools Aggregator - Reactor Dependency Convergence</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -33,7 +33,7 @@
 
 	</head>
 
-	<body class="page-license project-maven-doxia-tools" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-dependency-convergence project-maven-doxia-tools" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -56,13 +56,13 @@
 											<li ><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
 											<li ><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
 											<li ><a href="dependency-info.html" title="Dependency Information">Dependency Information</a></li>
-											<li ><a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a></li>
+											<li class="active"><a href="" title="Dependency Convergence">Dependency Convergence</a></li>
 											<li ><a href="source-repository.html" title="Source Repository">Source Repository</a></li>
 											<li ><a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a></li>
 											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
 											<li ><a href="integration.html" title="Continuous Integration">Continuous Integration</a></li>
 											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
-											<li class="active"><a href="" title="Project License">Project License</a></li>
+											<li ><a href="license.html" title="Project License">Project License</a></li>
 											<li ><a href="modules.html" title="Project Modules">Project Modules</a></li>
 											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
 											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
@@ -116,19 +116,421 @@
 			<div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="Overview">Overview</h2>
+  <h2 id="Reactor_Dependency_Convergence">Reactor Dependency Convergence</h2>
  </div> 
- <a name="Overview"></a> 
- <p>Typically the licenses listed for the project are that of the project itself, and not of dependencies.</p> 
+ <table border="0" class="bodyTable table table-striped table-hover"> 
+  <caption> 
+   <b>Legend:</b> 
+  </caption> 
+  <tbody> 
+   <tr class="a"> 
+    <td><i class="icon-ok"></i></td> 
+    <td>All projects share one version of the dependency.</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><i class="icon-exclamation-sign"></i></td> 
+    <td>At least one project has a differing version of the dependency.</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+ <br /> 
+ <table border="0" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="b"> 
+    <th>Ready for Release (100% Convergence and no SNAPSHOTS):</th> 
+    <td><i class="icon-ok"></i>&nbsp;<b>Success</b></td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>Convergence (NOD/NOA):</th> 
+    <td><i class="icon-ok"></i>&nbsp;<b>100%</b></td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>Number of SNAPSHOT artifacts (NOS):</th> 
+    <td>0</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>Number of unique artifacts (NOA):</th> 
+    <td>16</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>Number of dependencies (NOD):</th> 
+    <td>16</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>Number of sub-projects:</th> 
+    <td>2</td> 
+   </tr> 
+  </thead> 
+  <caption> 
+   <b>Statistics:</b> 
+  </caption> 
+  <tbody> 
+  </tbody> 
+ </table> 
 </div> 
 <div class="section"> 
- <h2 id="Project_License">Project License</h2> 
- <a name="Project_License"></a> 
+ <h3 id="Dependencies_used_in_sub-projects">Dependencies used in sub-projects</h3> 
  <div class="section"> 
-  <h3 id="Eclipse_Public_License_1.0">Eclipse Public License 1.0</h3> 
-  <a name="Eclipse_Public_License_1.0"></a> 
-  <p>http://www.opensource.org/licenses/EPL-1.0</p> 
-  <p>Maven can't find the file 'LICENSE' on the system.</p> 
+  <h4 id="commons-io:commons-io">commons-io:commons-io</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.4</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="junit:junit">junit:junit</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">3.8.2</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven.doxia:doxia-decoration-model">org.apache.maven.doxia:doxia-decoration-model</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.3</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven.doxia:doxia-logging-api">org.apache.maven.doxia:doxia-logging-api</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.3</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven.reporting:maven-reporting-api">org.apache.maven.reporting:maven-reporting-api</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">3.0</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven.shared:maven-plugin-testing-harness">org.apache.maven.shared:maven-plugin-testing-harness</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven:maven-artifact">org.apache.maven:maven-artifact</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.2.1</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven:maven-artifact-manager">org.apache.maven:maven-artifact-manager</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.2.1</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven:maven-model">org.apache.maven:maven-model</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.2.1</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven:maven-plugin-api">org.apache.maven:maven-plugin-api</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.2.1</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.apache.maven:maven-project">org.apache.maven:maven-project</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.2.1</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.codehaus.plexus:plexus-component-annotations">org.codehaus.plexus:plexus-component-annotations</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.5.5</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.codehaus.plexus:plexus-container-default">org.codehaus.plexus:plexus-container-default</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0-alpha-9</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.codehaus.plexus:plexus-i18n">org.codehaus.plexus:plexus-i18n</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0-beta-7</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.codehaus.plexus:plexus-interpolation">org.codehaus.plexus:plexus-interpolation</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.14</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="org.codehaus.plexus:plexus-utils">org.codehaus.plexus:plexus-utils</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">2.0.5</td> 
+         <td> 
+          <ol style="list-style-type: lower-alpha"> 
+           <li><a class="externalLink" href="http://site.trajano.net/doxia-integration-tools/doxia-integration-tools">net.trajano.maven.doxia:doxia-integration-tools</a></li> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
  </div> 
 </div>
 			</div>
@@ -161,8 +563,8 @@
 						<li >
 							<a href="dependency-info.html" title="Dependency Information">Dependency Information</a>
 						</li>
-						<li >
-							<a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
+						<li class="active">
+							<a href="#" title="Dependency Convergence">Dependency Convergence</a>
 						</li>
 						<li >
 							<a href="source-repository.html" title="Source Repository">Source Repository</a>
@@ -179,8 +581,8 @@
 						<li >
 							<a href="plugins.html" title="Project Plugins">Project Plugins</a>
 						</li>
-						<li class="active">
-							<a href="#" title="Project License">Project License</a>
+						<li >
+							<a href="license.html" title="Project License">Project License</a>
 						</li>
 						<li >
 							<a href="modules.html" title="Project Modules">Project Modules</a>
