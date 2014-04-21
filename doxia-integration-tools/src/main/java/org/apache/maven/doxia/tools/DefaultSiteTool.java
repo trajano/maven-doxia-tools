@@ -748,7 +748,7 @@ public class DefaultSiteTool
 
         final Locale llocale = ( locale == null ) ? Locale.getDefault() : locale;
 
-        String parentUrl = getDistMgmntSiteUrl( parentProject );
+        String parentUrl = parentProject.getUrl();
 
         if ( parentUrl != null )
         {
@@ -761,6 +761,7 @@ public class DefaultSiteTool
                 parentUrl += "/index.html";
             }
 
+            // TODO pass an indication whether relativization is required or not
             parentUrl = getRelativePath( parentUrl, getDistMgmntSiteUrl( project ) );
         }
         else
