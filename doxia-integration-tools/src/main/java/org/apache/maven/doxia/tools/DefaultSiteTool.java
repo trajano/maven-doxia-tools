@@ -23,10 +23,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,7 +37,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.io.FilenameUtils;
-
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -61,7 +59,6 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectBuilder;
 import org.apache.maven.project.ProjectBuildingException;
 import org.apache.maven.reporting.MavenReport;
-
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.i18n.I18N;
@@ -1023,12 +1020,11 @@ public class DefaultSiteTool
      */
     protected static String getNormalizedPath( String path )
     {
-        String normalized = FilenameUtils.normalize( path );
-        if ( normalized == null )
-        {
-            normalized = path;
-        }
-        return ( normalized == null ) ? null : normalized.replace( '\\', '/' );
+    	if (path == null)
+    	{
+    		return null;
+    	}
+    	return URI.create(path).normalize().toASCIIString();
     }
 
     // ----------------------------------------------------------------------
