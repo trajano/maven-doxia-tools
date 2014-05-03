@@ -1024,7 +1024,14 @@ public class DefaultSiteTool
     	{
     		return null;
     	}
-    	return URI.create(path).normalize().toASCIIString();
+    	if (path.startsWith("file:")) 
+    	{
+			// handle special case for file URLs.
+			return URI
+					.create(path.replace('\\', '/').replace(" ", "%20")
+							.replace("//", "/")).normalize().toASCIIString().replace("%20", " ");
+		}
+    	return URI.create(path.replace('\\', '/')).normalize().toASCIIString();
     }
 
     // ----------------------------------------------------------------------
