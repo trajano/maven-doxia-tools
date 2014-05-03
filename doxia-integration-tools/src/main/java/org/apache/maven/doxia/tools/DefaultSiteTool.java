@@ -526,7 +526,7 @@ public class DefaultSiteTool
             {
                 MenuItem item =
                     createCategoryMenu( i18n.getString( "site-tool", llocale, "decorationModel.menu.projectinformation" ),
-                                        "/project-info.html", categoryReports, llocale );
+                                        "project-info.html", categoryReports, llocale );
                 menu.getItems().add( item );
                 found = true;
             }
@@ -536,7 +536,7 @@ public class DefaultSiteTool
             {
                 MenuItem item =
                     createCategoryMenu( i18n.getString( "site-tool", llocale, "decorationModel.menu.projectreports" ),
-                                        "/project-reports.html", categoryReports, llocale );
+                                        "project-reports.html", categoryReports, llocale );
                 menu.getItems().add( item );
                 found = true;
             }
