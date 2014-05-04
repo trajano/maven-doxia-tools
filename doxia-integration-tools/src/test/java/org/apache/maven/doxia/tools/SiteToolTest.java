@@ -135,16 +135,16 @@ public class SiteToolTest
 
         to = "http://maven.apache.org/";
         from = "http://maven.apache.org/plugins/maven-site-plugin";
-        assertEquals( tool.getRelativePath( to, from ), ".." + File.separator + ".." );
+        assertEquals( tool.getRelativePath( to, from ), "../.." );
         to = "http://maven.apache.org";
         from = "http://maven.apache.org/plugins/maven-site-plugin/";
-        assertEquals( tool.getRelativePath( to, from ), ".." + File.separator + ".." );
+        assertEquals( tool.getRelativePath( to, from ), "../.." );
         to = "http://maven.apache.org/";
         from = "http://maven.apache.org/plugins/maven-site-plugin/";
-        assertEquals( tool.getRelativePath( to, from ), ".." + File.separator + ".." );
+        assertEquals( tool.getRelativePath( to, from ), "../.." );
         to = "http://maven.apache.org";
         from = "http://maven.apache.org/plugins/maven-site-plugin";
-        assertEquals( tool.getRelativePath( to, from ), ".." + File.separator + ".." );
+        assertEquals( tool.getRelativePath( to, from ), "../.." );
 
         to = "http://maven.apache.org/downloads.html";
         from = "http://maven.apache.org/index.html";
@@ -162,40 +162,40 @@ public class SiteToolTest
 
         to = "http://maven.apache.org/plugins/maven-site-plugin/";
         from = "http://maven.apache.org";
-        assertEquals( tool.getRelativePath( to, from ), "plugins" + File.separator + "maven-site-plugin" );
+        assertEquals( tool.getRelativePath( to, from ), "plugins/maven-site-plugin" );
         to = "http://maven.apache.org/plugins/maven-site-plugin/";
         from = "http://maven.apache.org/";
-        assertEquals( tool.getRelativePath( to, from ), "plugins" + File.separator + "maven-site-plugin" );
+        assertEquals( tool.getRelativePath( to, from ), "plugins/maven-site-plugin" );
         to = "http://maven.apache.org/plugins/maven-site-plugin";
         from = "http://maven.apache.org";
-        assertEquals( tool.getRelativePath( to, from ), "plugins" + File.separator + "maven-site-plugin" );
+        assertEquals( tool.getRelativePath( to, from ), "plugins/maven-site-plugin" );
         to = "http://maven.apache.org/plugins/maven-site-plugin";
         from = "http://maven.apache.org/";
-        assertEquals( tool.getRelativePath( to, from ), "plugins" + File.separator + "maven-site-plugin" );
+        assertEquals( tool.getRelativePath( to, from ), "plugins/maven-site-plugin" );
 
         // Tests between files as described in MIDEA-102
         to = "C:/dev/voca/gateway/parser/gateway-parser.iml";
         from = "C:/dev/voca/gateway/";
         assertEquals( "Child file using Windows drive letter",
-                      "parser" + File.separator + "gateway-parser.iml", tool.getRelativePath( to, from ) );
+                      "parser/gateway-parser.iml", tool.getRelativePath( to, from ) );
         to = "C:/foo/child";
         from = "C:/foo/master";
         assertEquals( "Sibling directory using Windows drive letter",
-                      ".." + File.separator + "child", tool.getRelativePath( to, from ) );
+                      "../child", tool.getRelativePath( to, from ) );
         to = "/myproject/myproject-module1";
         from = "/myproject/myproject";
         assertEquals( "Sibling directory with similar name",
-                      ".." + File.separator + "myproject-module1", tool.getRelativePath( to, from ) );
+                      "../myproject-module1", tool.getRelativePath( to, from ) );
 
         // Normalized paths as described in MSITE-284
-        assertEquals( ".." + File.separator + "project-module-1" + File.separator + "src" + File.separator + "site",
+        assertEquals( "../project-module-1/src/site",
                       tool.getRelativePath( "Z:\\dir\\project\\project-module-1\\src\\site",
                                             "Z:\\dir\\project\\project-module-1\\..\\project-parent" ) );
-        assertEquals( ".." + File.separator + ".." + File.separator + ".." + File.separator + "project-parent",
+        assertEquals( "../../../project-parent",
                       tool.getRelativePath( "Z:\\dir\\project\\project-module-1\\..\\project-parent",
                                             "Z:\\dir\\project\\project-module-1\\src\\site" ) );
 
-        assertEquals( ".." + File.separator + "foo", tool.getRelativePath( "../../foo/foo", "../../foo/bar" ) );
+        assertEquals( "../foo", tool.getRelativePath( "../../foo/foo", "../../foo/bar" ) );
     }
 
     /**

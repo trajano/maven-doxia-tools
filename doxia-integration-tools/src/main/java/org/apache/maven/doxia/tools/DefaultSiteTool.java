@@ -62,15 +62,15 @@ import org.apache.maven.reporting.MavenReport;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.i18n.I18N;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.util.IOUtil;
-import org.codehaus.plexus.util.ReaderFactory;
-import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.interpolation.EnvarBasedValueSource;
 import org.codehaus.plexus.interpolation.InterpolationException;
 import org.codehaus.plexus.interpolation.MapBasedValueSource;
 import org.codehaus.plexus.interpolation.ObjectBasedValueSource;
 import org.codehaus.plexus.interpolation.RegexBasedInterpolator;
+import org.codehaus.plexus.logging.AbstractLogEnabled;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.ReaderFactory;
+import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 /**
@@ -275,12 +275,12 @@ public class DefaultSiteTool
             relativePath = to;
         }
 
-        if ( getLogger().isDebugEnabled() && !relativePath.toString().equals( to ) )
+        if ( getLogger() != null && getLogger().isDebugEnabled() && !relativePath.toString().equals( to ) )
         {
             getLogger().debug( "Mapped url: " + to + " to relative path: " + relativePath );
         }
 
-        return relativePath;
+        return relativePath.replace(File.separatorChar, '/');
     }
 
     private static String getRelativeFilePath( final String oldPath, final String newPath )

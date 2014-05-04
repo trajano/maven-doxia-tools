@@ -53,4 +53,12 @@ public class DefaultSiteToolTest
         // note: space is preserved and double slash is removed!
         assertEquals( "file:/Documents and Settings/", DefaultSiteTool.getNormalizedPath( "file://Documents and Settings/" ) );
     }
+
+    public void testGetRelativePath()
+    {
+        SiteTool siteTool = new DefaultSiteTool();
+        assertEquals( "..", siteTool.getRelativePath("www", "www/slashdot"));
+        assertEquals( "../..", siteTool.getRelativePath("www", "www/slashdot/foo"));
+        assertEquals( "slashdot", siteTool.getRelativePath("www/slashdot", "www"));
+    }
 }
