@@ -31,20 +31,18 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFile;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFileResult;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckModel;
 import org.apache.maven.doxia.linkcheck.model.io.xpp3.LinkcheckModelXpp3Writer;
 import org.apache.maven.doxia.linkcheck.validation.FileLinkValidator;
 import org.apache.maven.doxia.linkcheck.validation.HTTPLinkValidationResult;
+import org.apache.maven.doxia.linkcheck.validation.HttpURLConnectionLinkValidator;
 import org.apache.maven.doxia.linkcheck.validation.LinkValidationItem;
 import org.apache.maven.doxia.linkcheck.validation.LinkValidationResult;
 import org.apache.maven.doxia.linkcheck.validation.LinkValidatorManager;
 import org.apache.maven.doxia.linkcheck.validation.MailtoLinkValidator;
 import org.apache.maven.doxia.linkcheck.validation.OfflineHTTPLinkValidator;
-import org.apache.maven.doxia.linkcheck.validation.OnlineHTTPLinkValidator;
-
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
@@ -391,7 +389,7 @@ public final class DefaultLinkCheck
 
         if ( isOnline() )
         {
-            OnlineHTTPLinkValidator olv = new OnlineHTTPLinkValidator( http );
+            final HttpURLConnectionLinkValidator olv = new HttpURLConnectionLinkValidator( http );
 
             if ( this.baseURL != null )
             {
