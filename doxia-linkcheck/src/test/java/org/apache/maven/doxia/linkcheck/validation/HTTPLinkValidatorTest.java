@@ -52,7 +52,7 @@ public class HTTPLinkValidatorTest extends TestCase
             */
             // TODO: use proxy settings above
 
-            this.hlv = new OnlineHTTPLinkValidator();
+            this.hlv = new HttpURLConnectionLinkValidator();
 
             assertEquals( LinkcheckFileResult.VALID_LEVEL, checkLink( "http://www.apache.org" ).getStatus() );
             assertEquals( LinkcheckFileResult.ERROR_LEVEL, checkLink( "http://www.example.com>);" ).getStatus() );

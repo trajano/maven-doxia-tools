@@ -50,12 +50,14 @@ import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Checks links which are normal URLs
+ * @deprecated use {@link HttpURLConnectionLinkValidator}
  *
  * @author <a href="mailto:bwalding@apache.org">Ben Walding</a>
  * @author <a href="mailto:aheritier@apache.org">Arnaud Heritier</a>
  * @author <a href="mailto:vincent.siveton@gmail.com">Vincent Siveton</a>
  * @version $Id$
  */
+@Deprecated
 public final class OnlineHTTPLinkValidator
     extends HTTPLinkValidator
 {
