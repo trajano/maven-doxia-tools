@@ -140,9 +140,14 @@ under the License.
             <excludes combine.children="append">
               <exclude>src/test/resources/expected/doc-book/plexus-user-guide.xml</exclude>
               <exclude>src/test/resources/book-1/section-*.apt</exclude>
-            </excludes>            
+            </excludes>
           </configuration>
-        </plugin>      
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-metadata</artifactId>
+          <version>1.7.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
