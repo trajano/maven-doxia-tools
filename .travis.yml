@@ -30,7 +30,7 @@ install:
 before_script:
 - mvn clean
 script:
-- mvn verify site
+- mvn verify site -pl doxia-linkcheck
 # - mvn verify site sonar:sonar
 #deploy:
 #- provider: script
