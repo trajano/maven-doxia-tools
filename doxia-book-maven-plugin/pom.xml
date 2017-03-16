@@ -141,6 +141,11 @@ under the License.
           <artifactId>maven-plugin-plugin</artifactId>
           <version>${pluginPluginVersion}</version>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-metadata</artifactId>
+          <version>1.7.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
