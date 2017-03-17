@@ -21,7 +21,6 @@ package org.apache.maven.doxia.linkcheck.validation;
 
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,6 +53,11 @@ public final class HttpURLConnectionLinkValidator
      * {@link org.apache.commons.httpclient.HttpStatus#SC_TEMPORARY_REDIRECT}.
      */
     private static final int SC_TEMPORARY_REDIRECT = 307;
+
+    /**
+     * Maximum number of redirects before stopping.
+     */
+    private static final int  MAX_REDIRECT_COUNT = 20;
 
     /** The http bean encapsulating all http parameters supported. */
     private HttpBean http;
@@ -113,25 +117,12 @@ public final class HttpURLConnectionLinkValidator
     /** {@inheritDoc} */
     public LinkValidationResult validateLink( final LinkValidationItem lvi )
     {
-        if ( this.http.getHttpClientParameters() != null )
-        {
-            for ( Map.Entry<Object, Object> entry : this.http.getHttpClientParameters().entrySet() )
-            {
-                if ( entry.getValue() != null )
-                {
-                    System.setProperty( entry.getKey().toString(), entry.getValue().toString() );
-                }
-            }
-        }
-
-        // Some web servers don't allow the default user-agent sent by httpClient
-        System.setProperty( "http.agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" );
 
         String link = lvi.getLink();
-        
+
         try
         {
-            final URI linkURI;
+            URI linkURI;
             if ( link.startsWith( "/" ) )
             {
                 if ( getBaseURL() == null )
@@ -153,43 +144,60 @@ public final class HttpURLConnectionLinkValidator
                 linkURI = new URI( link );
             }
 
+            int redirectCount = 0;
             HttpURLConnection conn;
             String content = null;
+            String cookies = null;
             try
             {
-                conn = (HttpURLConnection) linkURI.toURL().openConnection();
-                final boolean hasContentExpected;
-                if ( HEAD_METHOD.equalsIgnoreCase( this.http.getMethod() ) )
-                {
-                    conn.setRequestMethod( "HEAD" );
-                    hasContentExpected = false;
-                }
-                else if ( GET_METHOD.equalsIgnoreCase( this.http.getMethod() ) )
-                {
-                    conn.setRequestMethod( "GET" );
-                    hasContentExpected = true;
-                }
-                else
-                {
-                    if ( LOG.isErrorEnabled() )
+                do {
+                    conn = (HttpURLConnection) linkURI.toURL().openConnection();
+                    conn.setRequestProperty( "User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" );
+                    final boolean hasContentExpected;
+                    if ( HEAD_METHOD.equalsIgnoreCase( this.http.getMethod() ) )
                     {
-                        LOG.error( "Unsupported method: " + this.http.getMethod() + ", using 'get'." );
+                        conn.setRequestMethod( "HEAD" );
+                        hasContentExpected = false;
                     }
-                    conn.setRequestMethod( "GET" );
-                    hasContentExpected = true;
-                }
+                    else if ( GET_METHOD.equalsIgnoreCase( this.http.getMethod() ) )
+                    {
+                        conn.setRequestMethod( "GET" );
+                        hasContentExpected = true;
+                    }
+                    else
+                    {
+                        if ( LOG.isErrorEnabled() )
+                        {
+                            LOG.error( "Unsupported method: " + this.http.getMethod() + ", using 'get'." );
+                        }
+                        conn.setRequestMethod( "GET" );
+                        hasContentExpected = true;
+                    }
 
-                conn.setConnectTimeout( http.getTimeout() );
-                conn.connect();
-                if ( hasContentExpected )
-                {
-                    content = IOUtil.toString( conn.getInputStream() );
+                    if ( cookies != null )
+                    {
+                        conn.setRequestProperty("Cookie", cookies);
+                    }
+
+                    conn.setConnectTimeout( http.getTimeout() );
+                    conn.connect();
+                    if ( isRedirect( conn.getResponseCode() ) )
+                    {
+                        linkURI = URI.create( conn.getHeaderField( "Location" ) );
+                        cookies = conn.getHeaderField( "Set-Cookie" );
+                        ++redirectCount;
+                    }
+                    else if ( hasContentExpected )
+                    {
+                        content = IOUtil.toString( conn.getInputStream() );
+                    }
+                    else
+                    {
+                        conn.getContent();
+                    }
+                    conn.disconnect();
                 }
-                else
-                {
-                    conn.getContent();
-                }
-                conn.disconnect();
+                while ( redirectCount < MAX_REDIRECT_COUNT && isRedirect( conn.getResponseCode() ) );
             }
             catch ( Throwable t )
             {
@@ -249,27 +257,12 @@ public final class HttpURLConnectionLinkValidator
 
             return new LinkValidationResult( LinkcheckFileResult.ERROR_LEVEL, false, t.getMessage() );
         }
-        finally
-        {
-            System.getProperties().remove( "http.agent" );
-
-            if ( this.http.getHttpClientParameters() != null )
-            {
-                for ( Map.Entry<Object, Object> entry : this.http.getHttpClientParameters().entrySet() )
-                {
-                    if ( entry.getValue() != null )
-                    {
-                        System.getProperties().remove( entry.getKey().toString() );
-                    }
-                }
-            }
-        }
     }
 
     /**
      * Checks if the HTTP response code is a redirect.  It also checks for 307 to make it compatible with the HTTP
      * client implementation.
-     * 
+     *
      * @param responseCode from {@link HttpURLConnection#getResponseCode()}
      * @return <code>true</code> if the response is an HTTP redirect.
      */

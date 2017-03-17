@@ -56,6 +56,28 @@ public class HTTPLinkValidatorTest extends TestCase
         }
     }
 
+    /**
+     * Tests a valid known redirect.
+     */
+    public void testValidateRedirectLink() throws Exception
+    {
+        if ( this.mavenOnline )
+        {
+
+            this.hlv = new HttpURLConnectionLinkValidator();
+
+            assertEquals( LinkcheckFileResult.VALID_LEVEL, checkLink( "http://site.trajano.net/trajano" ).getStatus() );
+
+        }
+        else
+        {
+            this.hlv = new OfflineHTTPLinkValidator();
+
+            assertEquals( LinkcheckFileResult.WARNING_LEVEL, checkLink( "http://site.trajano.net/trajano" ).getStatus() );
+
+        }
+    }
+
     protected LinkValidationResult checkLink( String link ) throws Exception
     {
 
