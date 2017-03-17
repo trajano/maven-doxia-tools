@@ -40,17 +40,6 @@ public class HTTPLinkValidatorTest extends TestCase
     {
         if ( this.mavenOnline )
         {
-            /*
-            this.hlv =
-                new OnlineHTTPLinkValidator( System.getProperty( "maven.linkcheck.method" ),
-                                             System.getProperty( "maven.linkcheck.proxy.host" ),
-                                             System.getProperty( "maven.linkcheck.proxy.port" ),
-                                             System.getProperty( "maven.linkcheck.proxy.username" ),
-                                             System.getProperty( "maven.linkcheck.proxy.password" ),
-                                             System.getProperty( "maven.linkcheck.proxy.ntlm.host" ),
-                                             System.getProperty( "maven.linkcheck.proxy.ntlm.domain" ) );
-            */
-            // TODO: use proxy settings above
 
             this.hlv = new HttpURLConnectionLinkValidator();
 

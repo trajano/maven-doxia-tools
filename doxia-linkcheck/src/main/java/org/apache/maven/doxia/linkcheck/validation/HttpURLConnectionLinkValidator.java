@@ -23,8 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Map;
 
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.maven.doxia.linkcheck.HttpBean;
@@ -50,6 +48,12 @@ public final class HttpURLConnectionLinkValidator
 
     /** Use the head method to test pages. */
     private static final String HEAD_METHOD = "head";
+
+    /**
+     * Temporary Redirect HTTP status code.  From
+     * {@link org.apache.commons.httpclient.HttpStatus#SC_TEMPORARY_REDIRECT}.
+     */
+    private static final int SC_TEMPORARY_REDIRECT = 307;
 
     /** The http bean encapsulating all http parameters supported. */
     private HttpBean http;
@@ -247,7 +251,7 @@ public final class HttpURLConnectionLinkValidator
         }
         finally
         {
-            System.getProperties().remove( HttpMethodParams.USER_AGENT );
+            System.getProperties().remove( "http.agent" );
 
             if ( this.http.getHttpClientParameters() != null )
             {
@@ -273,6 +277,6 @@ public final class HttpURLConnectionLinkValidator
     {
         return responseCode == HttpURLConnection.HTTP_MOVED_TEMP
             || responseCode == HttpURLConnection.HTTP_MOVED_PERM
-            || responseCode == HttpStatus.SC_TEMPORARY_REDIRECT;
+            || responseCode == SC_TEMPORARY_REDIRECT;
     }
 }
