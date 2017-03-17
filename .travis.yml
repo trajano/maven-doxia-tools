@@ -1,7 +1,7 @@
 branches:
   only:
   - trajano-fork
-  - "/^maven-doxia-tools-[\\d\\.]+$/"
+  - "/^doxia-linkcheck-[\\d\\.]+$/"
 language: java
 jdk:
 - oraclejdk8
@@ -27,13 +27,14 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_0e8876090b5c_key -iv $encrypted_0e8876090b5c_iv
   -in deploy-keys.tar.enc -out deploy-keys.tar -d
 install:
+- tar xf deploy-keys.tar -C $HOME && chmod go-rwx -R $HOME/.m2 $HOME/.ssh
 - mvn dependency:go-offline
 before_script:
 - mvn clean
 script:
 - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify site -pl doxia-linkcheck
 after_success:
-- mvn sonar:sonar -pl !doxia-book-maven-plugin,!doxia-book-renderer,!doxia-converter
+- mvn sonar:sonar -pl .,doxia-linkcheck
 deploy:
 - provider: script
   skip_cleanup: true
