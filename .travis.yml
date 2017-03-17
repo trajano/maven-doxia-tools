@@ -16,31 +16,33 @@ addons:
     - graphviz
   sonarqube:
     organization: trajano
+    branches :
+    - trajano-fork
     token:
-      secure: YnJoL7AhM3OJeW8mGfyd5tUjlVwHRFFoV5LW8L6y/FaMZJ4P22yCMO3lu37B9U3n33emMxB2U3T1GUdBrF3ldyHrrSjOmdIGd6cq+ZvzB+cC4LTyy8cvhKmkaULiQf1Cqvwlrzc8jJ6L6jEduT6DW9AsodtMyebVePOR2rw2sSI=
-#env:
-#  global:
-#  - secure: WZwHwifyIrOFWA06HU18+n5momE68IZaW5YEKzKgznVT8rU4wOYDS7QvWJShATGyqGGc4stsVFigCOo4fe1zCw0WQpo9qu1R5zlw2jatLuTWj/BOjhA6JVr133MN4EmueiPvZqKI5icBz3UNxA42Fxzo4ku1til+0jpwI6QlkoI=
-#before_install:
-#- openssl aes-256-cbc -K $encrypted_65553d4eaa33_key -iv $encrypted_65553d4eaa33_iv
-#  -in deploy-keys.tar.enc -out deploy-keys.tar -d
+      secure: rG9d36vZdQTGE0k3U6giqfBJjk+rQImJ/Aq3luf33i3o8w5ec87lMSQFiDlTXGpvDI9VXlGoaYgt60xubw/f0+eqdpeX6v2aquCEh8N41e3Pyn4j1ekQr4z247q5PZu5x1C/0JiyJ3oXLvlSOOhtKZKcZ2JsKIVya4ytwWJlEnY=
+env:
+  global:
+  - secure: jXLM5AMW/hu7ENhq7onhVSqS9P8TC8hb2YEdYwW4wsh8z/Py9o1ppom6m4ZqQqqEGfrYdj4LFBkDoL3QJ9DP/qTlAOjo72f/6gbjmD96/fPNiA/O3D5dXP0nfZFZwwfcLKydpF7oKFb8sWgtZbZMuUECJKtiL2hMURRq5arhdIw=
+before_install:
+- openssl aes-256-cbc -K $encrypted_0e8876090b5c_key -iv $encrypted_0e8876090b5c_iv
+  -in deploy-keys.tar.enc -out deploy-keys.tar -d
 install:
-#- tar xf deploy-keys.tar -C $HOME && chmod go-rwx -R $HOME/.m2 $HOME/.ssh
 - mvn dependency:go-offline
 before_script:
 - mvn clean
 script:
-- mvn verify site -pl doxia-linkcheck
-# - mvn verify site sonar:sonar
-#deploy:
-#- provider: script
-#  skip_cleanup: true
-#  script: mvn deploy site-deploy
-#  on:
-#    branch: master
-#- provider: script
-#  skip_cleanup: true
-#  script: printf 'scm.tag=%1s\nscm.url=scm:git:https://git@github.com/%2s.git' "${TRAVIS_TAG}"
-#    "${TRAVIS_REPO_SLUG}" > release.properties && mvn release:perform
-#  on:
-#    tags: true
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify site -pl doxia-linkcheck
+after_success:
+- mvn sonar:sonar -pl !doxia-book-maven-plugin,!doxia-book-renderer,!doxia-converter
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: mvn deploy site-deploy -pl doxia-linkcheck
+  on:
+    branch: trajano-fork
+- provider: script
+  skip_cleanup: true
+  script: printf 'scm.tag=%1s\nscm.url=scm:git:https://git@github.com/%2s.git' "${TRAVIS_TAG}"
+    "${TRAVIS_REPO_SLUG}" > release.properties && mvn release:perform
+  on:
+    tags: true
