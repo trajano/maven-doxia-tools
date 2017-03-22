@@ -14,6 +14,9 @@ addons:
   apt:
     packages:
     - graphviz
+  ssh_known_hosts:
+  - github.com
+  - site.trajano.net:6022
   sonarqube:
     organization: trajano
     branches :
@@ -28,17 +31,16 @@ before_install:
   -in deploy-keys.tar.enc -out deploy-keys.tar -d
 install:
 - tar xf deploy-keys.tar -C $HOME && chmod go-rwx -R $HOME/.m2 $HOME/.ssh
+- cd doxia-linkcheck
 - mvn dependency:go-offline
 before_script:
 - mvn clean
 script:
-- mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify site -pl doxia-linkcheck
-after_success:
-- mvn sonar:sonar -pl .,doxia-linkcheck
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify site sonar:sonar
 deploy:
 - provider: script
   skip_cleanup: true
-  script: mvn deploy site-deploy -pl doxia-linkcheck
+  script: mvn deploy site-deploy
   on:
     branch: trajano-fork
 - provider: script
