@@ -60,11 +60,11 @@ import org.codehaus.plexus.util.WriterFactory;
  * @version $Id$
  */
 @Component( role = LinkCheck.class )
-public final class DefaultLinkCheck
+public final class DefaultLinkCheck2
     implements LinkCheck
 {
     /** Log. */
-    private static final Log LOG = LogFactory.getLog( DefaultLinkCheck.class );
+    private static final Log LOG = LogFactory.getLog( DefaultLinkCheck2.class );
 
     /** One MegaByte. */
     private static final long MEG = 1024 * 1024;
