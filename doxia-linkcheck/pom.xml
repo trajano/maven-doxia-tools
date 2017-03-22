@@ -40,6 +40,7 @@ under the License.
     <connection>scm:git:https://github.com/trajano/${repo.id}.git</connection>
     <developerConnection>scm:git:https://github.com/trajano/${repo.id}.git</developerConnection>
     <url>https://github.com/trajano/${repo.id}</url>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
