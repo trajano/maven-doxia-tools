@@ -30,7 +30,7 @@ under the License.
 
   <groupId>net.trajano.maven.doxia</groupId>
   <artifactId>doxia-linkcheck</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.0-SNAPSHOT</version>
 
   <name>Doxia :: Linkcheck</name>
   <description>Doxia linkcheck is a tool to check the validity of links.</description>
@@ -112,10 +112,8 @@ under the License.
             </dependency>
           </dependencies>
           <configuration>
-            <autoVersionSubmodules>false</autoVersionSubmodules>
-            <releaseProfiles>sonatype-release-profile</releaseProfiles>
             <providerImplementations>
-              <git>jgit</git>
+              <git>git</git>
             </providerImplementations>
           </configuration>
         </plugin>
