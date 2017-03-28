@@ -78,6 +78,52 @@ public class HTTPLinkValidatorTest extends TestCase
         }
     }
 
+    /**
+     * Tests 401.
+     */
+    public void test401() throws Exception
+    {
+        if ( this.mavenOnline )
+        {
+
+            this.hlv = new HttpURLConnectionLinkValidator();
+
+            final HTTPLinkValidationResult result = (HTTPLinkValidationResult)checkLink( "https://oss.sonatype.org/service/local/staging/deploy/maven2/" );
+            assertEquals( LinkcheckFileResult.ERROR_LEVEL, result.getStatus() );
+            assertEquals( 401, result.getHttpStatusCode() );
+
+        }
+        else
+        {
+            this.hlv = new OfflineHTTPLinkValidator();
+
+            assertEquals( LinkcheckFileResult.WARNING_LEVEL, checkLink( "https://oss.sonatype.org/service/local/staging/deploy/maven2/" ).getStatus() );
+
+        }
+    }
+
+    /**
+     * Tests no content type.
+     */
+    public void testNoContentType() throws Exception
+    {
+        if ( this.mavenOnline )
+        {
+
+            this.hlv = new HttpURLConnectionLinkValidator();
+
+            assertEquals( LinkcheckFileResult.VALID_LEVEL, checkLink( "https://oss.sonatype.org/content/repositories/snapshots/" ).getStatus() );
+
+        }
+        else
+        {
+            this.hlv = new OfflineHTTPLinkValidator();
+
+            assertEquals( LinkcheckFileResult.WARNING_LEVEL, checkLink( "https://oss.sonatype.org/content/repositories/snapshots/" ).getStatus() );
+
+        }
+    }
+
     protected LinkValidationResult checkLink( String link ) throws Exception
     {
 

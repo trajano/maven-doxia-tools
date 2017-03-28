@@ -19,6 +19,7 @@ package org.apache.maven.doxia.linkcheck.validation;
  * under the License.
  */
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 
@@ -119,6 +120,7 @@ public final class HttpURLConnectionLinkValidator
     {
 
         String link = lvi.getLink();
+        HttpURLConnection conn = null;
 
         try
         {
@@ -145,7 +147,6 @@ public final class HttpURLConnectionLinkValidator
             }
 
             int redirectCount = 0;
-            HttpURLConnection conn;
             String content = null;
             String cookies = null;
             try
@@ -181,7 +182,11 @@ public final class HttpURLConnectionLinkValidator
 
                     conn.setConnectTimeout( http.getTimeout() );
                     conn.connect();
-                    if ( isRedirect( conn.getResponseCode() ) )
+                    if ( isHttpError( conn.getResponseCode() ) ) {
+                        return new HTTPLinkValidationResult( LinkcheckFileResult.ERROR_LEVEL, false, conn.getResponseCode(),
+                                    conn.getResponseMessage() );
+                    }
+                    else if ( isRedirect( conn.getResponseCode() ) )
                     {
                         linkURI = URI.create( conn.getHeaderField( "Location" ) );
                         cookies = conn.getHeaderField( "Set-Cookie" );
@@ -193,7 +198,7 @@ public final class HttpURLConnectionLinkValidator
                     }
                     else
                     {
-                        conn.getContent();
+                        conn.getInputStream();
                     }
                     conn.disconnect();
                 }
@@ -257,6 +262,17 @@ public final class HttpURLConnectionLinkValidator
 
             return new LinkValidationResult( LinkcheckFileResult.ERROR_LEVEL, false, t.getMessage() );
         }
+    }
+
+    /**
+     * Checks if the HTTP response code is an error.  An error code is anything above 400 and 599.
+     *
+     * @param responseCode from {@link HttpURLConnection#getResponseCode()}
+     * @return <code>true</code> if the response is an HTTP client or server error.
+     */
+    private boolean isHttpError( final int responseCode )
+    {
+        return responseCode >= 400 && responseCode <= 599;
     }
 
     /**
