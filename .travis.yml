@@ -13,6 +13,7 @@ cache:
 addons:
   apt:
     packages:
+    - ca-certificates
     - graphviz
   ssh_known_hosts:
   - github.com
