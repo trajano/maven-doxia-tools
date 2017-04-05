@@ -205,9 +205,6 @@ under the License.
   <reporting>
     <plugins>
       <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-      <plugin>
         <artifactId>maven-surefire-report-plugin</artifactId>
       </plugin>
       <plugin>
