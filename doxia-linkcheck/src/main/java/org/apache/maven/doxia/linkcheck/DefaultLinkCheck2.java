@@ -87,14 +87,14 @@ public final class DefaultLinkCheck2
     /**
      * Excluded http errors only in on line mode.
      *
-     * @see {@link HttpStatus} for all defined values.
+     * @see java.net.HttpURLConnection for all defined values.
      */
     private int[] excludedHttpStatusErrors = null;
 
     /**
      * Excluded http warnings only in on line mode.
      *
-     * @see {@link HttpStatus} for all defined values.
+     * @see java.net.HttpURLConnection for all defined values.
      */
     private int[] excludedHttpStatusWarnings = null;
 
@@ -338,7 +338,7 @@ public final class DefaultLinkCheck2
      * Returns the excluded HTTP errors, i.e. <code>404</code>.
      *
      * @return int[]
-     * @see {@link HttpStatus} for all possible values.
+     * @see java.net.HttpURLConnection for all defined values.
      */
     private int[] getExcludedHttpStatusErrors()
     {
@@ -349,7 +349,7 @@ public final class DefaultLinkCheck2
      * Returns the excluded HTTP warnings, i.e. <code>301</code>.
      *
      * @return int[]
-     * @see {@link HttpStatus} for all possible values.
+     * @see java.net.HttpURLConnection for all defined values.
      */
     private int[] getExcludedHttpStatusWarnings()
     {
@@ -358,7 +358,7 @@ public final class DefaultLinkCheck2
 
     /**
      * Returns the LinkValidatorManager.
-     * If this hasn't been set before with {@link #setLinkValidatorManager(LinkValidatorManager)}
+     * If this hasn't been set before with {@link #initDefaultLinkValidatorManager()}
      * a default LinkValidatorManager will be returned.
      *
      * @return the LinkValidatorManager
