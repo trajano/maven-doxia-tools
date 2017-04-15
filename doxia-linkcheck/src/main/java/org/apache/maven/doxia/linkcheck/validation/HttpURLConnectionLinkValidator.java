@@ -20,6 +20,9 @@ package org.apache.maven.doxia.linkcheck.validation;
  */
 
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
 import java.net.URI;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -30,6 +33,7 @@ import javax.net.ssl.SSLHandshakeException;
 import org.apache.maven.doxia.linkcheck.DefaultLinkCheck2;
 import org.apache.maven.doxia.linkcheck.HttpBean;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFileResult;
+import org.codehaus.plexus.util.Base64;
 import org.codehaus.plexus.util.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,7 +101,7 @@ public final class HttpURLConnectionLinkValidator
         }
 
         this.http = bean;
-
+        
     }
 
     /**
@@ -158,7 +162,13 @@ public final class HttpURLConnectionLinkValidator
             {
                 do {
                     final URL url = linkURI.toURL();
-                    conn = (HttpURLConnection) url.openConnection();
+                    conn = (HttpURLConnection) url.openConnection(buildProxyForUri(linkURI));
+                    // Handle HTTP proxy authentication if provided.
+                    if (http.getProxyUser() != null && http.getProxyPassword() != null)
+                    {
+                    	conn.setRequestProperty("Proxy-Authorization", 
+                            "Basic " + new String( Base64.encodeBase64( ( http.getProxyUser() + http.getProxyPassword()).getBytes() ) ) );
+                    }
                     conn.setInstanceFollowRedirects(false);
                     final boolean hasContentExpected;
                     if ( HEAD_METHOD.equalsIgnoreCase( this.http.getMethod() ) )
@@ -282,6 +292,21 @@ public final class HttpURLConnectionLinkValidator
     }
 
     /**
+     * This will build the proxy for a given URI.  At the moment only HTTP proxies are supported.
+     * Also exclusion lists are not supported.
+     * 
+     * @param linkURI URI to connect to
+     * @return proxy
+     */
+    private Proxy buildProxyForUri(final URI linkURI) {
+    	if (http.getProxyHost() != null && http.getProxyPort() != 0)
+    	{
+    		return new Proxy(Type.HTTP, new InetSocketAddress(http.getProxyHost(), http.getProxyPort()));
+    	}
+		return Proxy.NO_PROXY;
+	}
+
+	/**
      * Checks if the URL has an HTTPS scheme and put out a warning when the cryptography extensions are not installed
      *
      * @param responseCode from {@link HttpURLConnection#getResponseCode()}
@@ -308,7 +333,7 @@ public final class HttpURLConnectionLinkValidator
     {
         return responseCode >= 400 && responseCode <= 599;
     }
-
+    
     /**
      * Checks if the HTTP response code is a redirect.  It also checks for 307 to make it compatible with the HTTP
      * client implementation.
