@@ -29,8 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFile;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFileResult;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckModel;
@@ -49,6 +47,8 @@ import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.ReaderFactory;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.WriterFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The main bean to be called whenever a set of documents should have their links checked.
@@ -64,7 +64,7 @@ public final class DefaultLinkCheck2
     implements LinkCheck
 {
     /** Log. */
-    private static final Log LOG = LogFactory.getLog( DefaultLinkCheck2.class );
+	private static final Logger LOG = LoggerFactory.getLogger( DefaultLinkCheck2.class );
 
     /** One MegaByte. */
     private static final long MEG = 1024 * 1024;
@@ -101,6 +101,7 @@ public final class DefaultLinkCheck2
     /** Online mode. */
     private boolean online;
 
+   
     /** Bean enncapsuling some https parameters */
     private HttpBean http;
 

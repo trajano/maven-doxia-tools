@@ -27,11 +27,12 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.maven.doxia.linkcheck.DefaultLinkCheck2;
 import org.apache.maven.doxia.linkcheck.HttpBean;
 import org.apache.maven.doxia.linkcheck.model.LinkcheckFileResult;
 import org.codehaus.plexus.util.IOUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Checks links which are normal URLs using {@link HttpURLConnection}.
@@ -45,7 +46,7 @@ public final class HttpURLConnectionLinkValidator
     extends HTTPLinkValidator
 {
     /** Log for debug output. */
-    private static final Log LOG = LogFactory.getLog( HttpURLConnectionLinkValidator.class );
+	private static final Logger LOG = LoggerFactory.getLogger( DefaultLinkCheck2.class );
 
     /** Use the get method to test pages. */
     private static final String GET_METHOD = "get";
