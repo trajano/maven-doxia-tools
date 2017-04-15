@@ -70,7 +70,8 @@ public class HTTPLinkValidatorTest extends TestCase
             this.hlv = new HttpURLConnectionLinkValidator();
             for (final String url : urls) 
             {
-                assertEquals(url + " had wrong result", LinkcheckFileResult.ERROR_LEVEL, checkLink( url ).getStatus() );
+                final LinkValidationResult checkLink = checkLink( url );
+                assertEquals(url + " had wrong result: " + checkLink.getErrorMessage(), LinkcheckFileResult.ERROR_LEVEL, checkLink.getStatus() );
             }
         }
         else
@@ -82,34 +83,6 @@ public class HTTPLinkValidatorTest extends TestCase
             }
         }
     }
-
-
-    /**
-     * Test some more public links.  Primarily to make sure some of the more problematic ones still work.
-     */
-    public void testValidateOtherInvalidLinks() throws Exception
-    {
-        final String[] urls = {
-            "http://mojo.codehaus.org/build-helper-maven-plugin"
-        };
-        if ( this.mavenOnline )
-        {
-            this.hlv = new HttpURLConnectionLinkValidator();
-            for (final String url : urls) 
-            {
-                assertEquals(url + " had wrong result", LinkcheckFileResult.ERROR_LEVEL, checkLink( url ).getStatus() );
-            }
-        }
-        else
-        {
-            this.hlv = new OfflineHTTPLinkValidator();
-            for (final String url : urls) 
-            {
-                assertEquals(url + " had wrong result", LinkcheckFileResult.WARNING_LEVEL, checkLink( url ).getStatus() );
-            }
-        }
-    }
-
 
     /**
      * Tests a valid known redirect.
